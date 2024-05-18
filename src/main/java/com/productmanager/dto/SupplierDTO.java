@@ -1,20 +1,20 @@
 package com.productmanager.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
+
 
 import java.time.LocalDate;
 
 public class SupplierDTO {
 
-    @NotEmpty
+    @NotBlank
     private String name;
-    @NotEmpty
+    @NotBlank
     private String address;
-    @NotEmpty
+    @NotBlank
     private String contact;
-    @NotEmpty
+    @NotBlank
     private String email;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -23,35 +23,35 @@ public class SupplierDTO {
     public SupplierDTO() {
     }
 
-    public @NotEmpty String getName() {
+    public @NotBlank String getName() {
         return name;
     }
 
-    public void setName(@NotEmpty String name) {
+    public void setName(@NotBlank String name) {
         this.name = name;
     }
 
-    public @NotEmpty String getAddress() {
+    public @NotBlank String getAddress() {
         return address;
     }
 
-    public void setAddress(@NotEmpty String address) {
+    public void setAddress(@NotBlank String address) {
         this.address = address;
     }
 
-    public @NotEmpty String getContact() {
+    public @NotBlank String getContact() {
         return contact;
     }
 
-    public void setContact(@NotEmpty String contact) {
+    public void setContact(@NotBlank String contact) {
         this.contact = contact;
     }
 
-    public @NotEmpty String getEmail() {
+    public @NotBlank String getEmail() {
         return email;
     }
 
-    public void setEmail(@NotEmpty String email) {
+    public void setEmail(@NotBlank String email) {
         this.email = email;
     }
 
