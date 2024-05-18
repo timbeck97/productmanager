@@ -1,10 +1,10 @@
 package com.productmanager.service.supplier;
 
 import com.productmanager.builder.SupplierBuilder;
+import com.productmanager.config.MessageSender;
 import com.productmanager.dto.SupplierDTO;
 import com.productmanager.model.Supplier;
 import com.productmanager.repository.SupplierRepository;
-import jakarta.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -17,9 +17,11 @@ public class SupplierServiceImp implements SupplierService{
     private final Logger log = LogManager.getLogger(this.getClass().getName());
 
     private final SupplierRepository supplierRepository;
+    private final MessageSender messageSender;
 
-    public SupplierServiceImp(SupplierRepository supplierRepository) {
+    public SupplierServiceImp(SupplierRepository supplierRepository, MessageSender messageSender) {
         this.supplierRepository = supplierRepository;
+        this.messageSender = messageSender;
     }
 
     @Override
@@ -31,6 +33,7 @@ public class SupplierServiceImp implements SupplierService{
                 .withCreatedAt(LocalDate.now())
                 .build());
         log.info("Supplier added: "+sup.getName());
+        messageSender.publishMessage(sup);
         return sup;
     }
 
@@ -43,6 +46,7 @@ public class SupplierServiceImp implements SupplierService{
             supplier1.setEmail(supplier.getEmail());
             Supplier sup = supplierRepository.save(supplier1);
             log.info("Supplier updated: "+sup.getName());
+            messageSender.publishMessage(sup);
             return sup;
         }).orElseThrow(()->new IllegalArgumentException("Supplier not found"));
     }

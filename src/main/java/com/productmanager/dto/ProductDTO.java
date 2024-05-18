@@ -3,6 +3,7 @@ package com.productmanager.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.productmanager.model.Product;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.BeanUtils;
 
 
@@ -15,7 +16,7 @@ public class ProductDTO {
     @NotBlank
     private String description;
 
-    @NotBlank
+    @NotNull
     private Long supplierId;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
